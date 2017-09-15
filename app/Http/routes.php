@@ -36,12 +36,48 @@ Route::get('/create', function () {
 });
 
 
+Route::get('/read', function () {
+
+    $post = Post::findOrFail(1);
+
+    foreach ($post->tags as $tag) {
+
+        echo $tag;
+    }
+});
+//
+//Route::get('/update', function () {
+//
+//    $post = Post::findOrFail(1);
+//
+//    foreach ($post->tags as $tag) {
+//        return $tag->whereName('PHP')->update(['name' => 'Javascript']);
+//    }
+//
+//});
 
 
+Route::get('/update', function () {
+
+    $post = Post::findOrFail(1);
+
+    $tag = Tag::find(2);
+
+    $post->tags()->save($tag);
+
+});
 
 
+Route::get('/delete', function () {
 
+    $post = Post::findOrFail(1);
 
+    foreach ($post->tags as $tag) {
+        $tag->whereId(1)->delete();
+
+    }
+
+});
 
 
 
